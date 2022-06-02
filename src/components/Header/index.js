@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import styles from './styles';
 
-function Header() {
+function Header({ children }) {
   return (
     <View>
-      <Text>Header</Text>
+      <Text style={styles.title}>{children}</Text>
     </View>
   );
 }

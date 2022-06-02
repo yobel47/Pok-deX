@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import PokemonController from './api/controllers/Pokemon';
+import Header from './components/Header';
 
 function App() {
   const tesi = () => {
@@ -18,6 +19,9 @@ function App() {
   return (
     <View>
       <Text>App</Text>
+      <Header>
+        <Text>ahooo</Text>
+      </Header>
       <TouchableOpacity onPress={() => tesi()}>
         <Text>Test</Text>
       </TouchableOpacity>
