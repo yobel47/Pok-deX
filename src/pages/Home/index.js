@@ -3,33 +3,32 @@ import {
   View, Text, ImageBackground, Dimensions,
 } from 'react-native';
 import React from 'react';
-import PokemonController from '../../api/controllers/Pokemon';
-import Header from '../../components/Header';
-import pokeballHeader from '../../assets/images/pokeballHeader.png';
+// import PokemonController from '../../api/controllers/Pokemon';
+import { pokeballHeader } from '../../assets';
 import styles from '../../utils/styles';
-import SearchBar from '../../components/SearchBar';
+import { SearchBar, PokemonCard } from '../../components';
 
-const { width, height } = Dimensions.get('screen');
+const { height } = Dimensions.get('screen');
 
 function Home() {
-  const tesi = () => {
-    const query = { offset: 0, limit: 20 };
-    PokemonController(query)
-      .then(
-        (result) => console.log(result),
-      )
-      .catch((error) => console.log(error));
-  };
+  // const tesi = () => {
+  //   const query = { offset: 0, limit: 20 };
+  //   PokemonController(query)
+  //     .then(
+  //       (result) => console.log(result),
+  //     )
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <>
       <ImageBackground
         resizeMode="contain"
-        style={{ width: width * 1, height: height / 4, marginTop: -15 }}
+        style={{ width: '100%', height: height / 4 }}
         source={pokeballHeader}
       >
         <View style={{
-          padding: 20,
+          paddingHorizontal: 40,
           marginTop: 80,
           marginBottom: 20,
         }}
@@ -43,7 +42,17 @@ function Home() {
           <SearchBar />
         </View>
       </ImageBackground>
-      <Text>asd</Text>
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom: 50,
+        marginTop: 70,
+        paddingHorizontal: 40,
+      }}
+      >
+        <Text>asd</Text>
+        <PokemonCard />
+      </View>
     </>
   );
 }
