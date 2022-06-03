@@ -55,9 +55,9 @@ const getPokemonData = async (value) => {
   }));
 
   // eslint-disable-next-line camelcase
-  const eggGroupsFormatted = pokemonSpecieData.egg_groups.map((egg_group) => ({
-    name: capitalizeFirstLetter(egg_group.name),
-    url: egg_group.url,
+  const eggGroupsFormatted = pokemonSpecieData.egg_groups.map((eggGroup) => ({
+    name: capitalizeFirstLetter(eggGroup.name),
+    url: eggGroup.url,
   }));
 
   return {
