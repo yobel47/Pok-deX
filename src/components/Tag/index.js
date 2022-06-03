@@ -1,14 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import Logo from '../Logo';
+import styles from '../../utils/styles';
 
-function Tag() {
+function Tag({ type }) {
   return (
-    <View>
-      <Text>Tag</Text>
+    <View style={{
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderRadius: 7,
+      marginRight: 5,
+      padding: 5,
+      marginTop: 2,
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
+      // opacity: 0.3,
+    }}
+    >
+      <Logo name={type} width={10} height={10} />
+      <Text
+        style={{
+          color: 'white',
+          marginLeft: 5,
+          textTransform: 'capitalize',
+          opacity: 1,
+          ...styles.pokemonType,
+        }}
+      >
+        {type}
+      </Text>
     </View>
   );
 }
 
 export default Tag;
-
-const styles = StyleSheet.create({});

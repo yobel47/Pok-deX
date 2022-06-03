@@ -34,7 +34,7 @@ export default StyleSheet.create({
   pokemonType: {
     fontFamily: 'SF-Pro-Display-Medium',
     fontWeight: '500',
-    fontSize: 12,
+    fontSize: 14,
   },
 
 });

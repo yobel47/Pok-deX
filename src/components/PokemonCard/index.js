@@ -6,7 +6,8 @@ import React from 'react';
 import styles from '../../utils/styles';
 import Pokeball from '../Pokeball';
 import { POKEMON_TYPE_COLORS } from '../../constant';
-import { Dots } from '../../assets/Icons';
+import { Dots } from '../../assets';
+import Tag from '../Tag';
 
 const { width } = Dimensions.get('screen');
 
@@ -23,7 +24,7 @@ function PokemonCard() {
       shadowOffset: { width: 0, height: 3 },
       shadowOpacity: 0.4,
       shadowRadius: 2,
-      backgroundColor: POKEMON_TYPE_COLORS.grass,
+      backgroundColor: POKEMON_TYPE_COLORS.fire,
     }}
     >
       <RectButton style={{ width: '100%', height: '100%', flexDirection: 'row' }}>
@@ -44,12 +45,20 @@ function PokemonCard() {
             </Text>
             <Text style={{ ...styles.pokemonName }}>Bulbasour</Text>
           </View>
-
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginLeft: 10,
+          }}
+          >
+            <Tag type="grass" />
+            <Tag type="poison" />
+          </View>
         </View>
 
         <Pokeball
-          width={100}
-          height={100}
+          width={120}
+          height={120}
           withRotate
           style={{
             position: 'absolute',
@@ -60,13 +69,13 @@ function PokemonCard() {
 
         <View style={{
           marginTop: -20,
-          marginLeft: -15,
+          marginLeft: -30,
         }}
         >
           <Image
             style={{
-              width: 120,
-              height: 120,
+              width: 150,
+              height: 150,
             }}
             source={{ uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png' }}
           />

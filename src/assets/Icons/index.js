@@ -1,5 +1,5 @@
-import Dots from './6x3.svg';
-import BiggerDots from './10x5.svg';
+import Dots from './dots.svg';
+import BiggerDots from './biggerDots.svg';
 import Search from './search.svg';
 import Bug from './bug.svg';
 import Dark from './dark.svg';
