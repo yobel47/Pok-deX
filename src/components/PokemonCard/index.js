@@ -1,5 +1,5 @@
 import {
-  View, Text, Image, Dimensions,
+  View, Text, Image, Dimensions, Animated,
 } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import React, { useMemo } from 'react';
@@ -11,14 +11,28 @@ import getColorByPokemonType from '../../utils/getColorByPokemonType';
 
 const { width } = Dimensions.get('screen');
 
-function PokemonCard({ item }) {
+function PokemonCard({ item, opacity }) {
   const backgroundColor = useMemo(
     () => getColorByPokemonType(item.types[0].name),
     [item.types],
   );
 
+  const containerStyle = {
+    opacity: opacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    }),
+  };
+
+  // useEffect(() => () => {
+  //   console.log('asd');
+  // }, []);
+
   return (
-    <View style={{
+    <Animated.View style={{
+      ...containerStyle,
+      marginHorizontal: 40,
       marginVertical: 12,
       borderRadius: 12,
       flexDirection: 'row',
@@ -87,7 +101,7 @@ function PokemonCard({ item }) {
           />
         </View>
       </RectButton>
-    </View>
+    </Animated.View>
   );
 }
 
