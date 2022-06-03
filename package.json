@@ -7,10 +7,12 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "linter": "eslint 'src/**/*.js'"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "husky": "^8.0.1",
     "metro-config": "^0.71.0",
     "react": "17.0.2",
     "react-native": "0.68.2",
