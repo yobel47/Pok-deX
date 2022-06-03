@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TouchableWithoutFeedback, TextInput } from 'react-native-gesture-handler';
-import Search from '../../assets/Icons/search.svg';
+import { Search } from '../../assets/Icons';
 
 function SearchBar({ onPress }) {
   return (

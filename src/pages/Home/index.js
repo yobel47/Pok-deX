@@ -43,16 +43,17 @@ function Home() {
         </View>
       </ImageBackground>
       <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // alignItems: 'center',
         paddingBottom: 50,
-        marginTop: 70,
+        marginTop: 90,
         paddingHorizontal: 40,
       }}
       >
-        <Text>asd</Text>
         <PokemonCard />
+        <Text>asd</Text>
       </View>
+
     </>
   );
 }

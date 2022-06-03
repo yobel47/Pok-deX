@@ -6,7 +6,6 @@ export default StyleSheet.create({
     fontWeight: '700',
     fontSize: 100,
   },
-
   applicationTitle: {
     fontFamily: 'SF-Pro-Display-Bold',
     fontWeight: '700',
@@ -30,7 +29,7 @@ export default StyleSheet.create({
   pokemonNumber: {
     fontFamily: 'SF-Pro-Display-Bold',
     fontWeight: '700',
-    fontSize: 12,
+    fontSize: 16,
   },
   pokemonType: {
     fontFamily: 'SF-Pro-Display-Medium',

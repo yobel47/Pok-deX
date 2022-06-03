@@ -19,6 +19,14 @@ function Pokeball({
         useNativeDriver: true,
       }),
     ).start();
+    // Animated.loop(
+    //   Animated.sequence([
+    //     Animated.timing(rotate, { toValue: 10, duration: 100, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: -10, duration: 100, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: 10, duration: 100, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: 0, duration: 100, useNativeDriver: true }),
+    //   ]),
+    // ).start();
   }, [rotate]);
 
   useEffect(() => {
@@ -56,7 +64,9 @@ function Pokeball({
     <Animated.View style={[withRotate && pokeballStyle, style]}>
       <Animated.Image
         source={pokeball}
-        style={{ width, height }}
+        style={{
+          width, height, tintColor: 'white', opacity: 0.2,
+        }}
       />
     </Animated.View>
   );
