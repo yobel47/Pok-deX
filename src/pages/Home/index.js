@@ -77,7 +77,7 @@ function Home() {
         //   )
         //   .catch((error) => console.log(error));
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         Alert.alert(
           'Fail to get Pokémons',
           'An error has ocurred when try to load the Pokémons, please try again.',
