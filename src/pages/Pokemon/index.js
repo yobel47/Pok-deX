@@ -1,12 +1,12 @@
 import { Text, View } from 'react-native';
 import React from 'react';
 
-function Detail() {
+function Pokemon() {
   return (
     <View>
-      <Text>Detail</Text>
+      <Text>Pokemon</Text>
     </View>
   );
 }
 
-export default Detail;
+export default Pokemon;

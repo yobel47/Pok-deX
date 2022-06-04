@@ -78,6 +78,7 @@ function Home() {
     setRefreshing(false);
   }, [loadPokemons]);
 
+  // const memoizedValue = useMemo(() => renderItem, [pokemons]);
   const keyExt = useCallback((item) => item.id);
   const renderItem = useCallback(({ item }) => (
     <PokemonCard item={item} opacity={opacity} />

@@ -3,7 +3,8 @@ import {
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { RectButton } from 'react-native-gesture-handler';
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import styles from '../../utils/styles';
 import Pokeball from '../Pokeball';
 import { Dots } from '../../assets';
@@ -13,6 +14,8 @@ import getColorByPokemonType from '../../utils/getColorByPokemonType';
 const { width } = Dimensions.get('screen');
 
 function PokemonCard({ item, opacity }) {
+  const navigation = useNavigation();
+
   const backgroundColor = useMemo(
     () => getColorByPokemonType(item.types[0].name),
     [item.types],
@@ -26,27 +29,28 @@ function PokemonCard({ item, opacity }) {
     }),
   };
 
-  // useEffect(() => () => {
-  //   console.log('asd');
-  // }, []);
+  const handlePress = useCallback(() => {
+    navigation.navigate('Pokemon', { item });
+  }, [item]);
 
   return (
-    <Animated.View style={{
-      ...containerStyle,
-      marginHorizontal: 40,
-      marginVertical: 12,
-      borderRadius: 12,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      elevation: 5,
-      shadowColor: 'black',
-      shadowOffset: { width: 0, height: 3 },
-      shadowOpacity: 0.4,
-      shadowRadius: 2,
-      backgroundColor,
-    }}
+    <Animated.View
+      style={{
+        ...containerStyle,
+        marginHorizontal: 40,
+        marginVertical: 12,
+        borderRadius: 12,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        elevation: 5,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
+        backgroundColor,
+      }}
     >
-      <RectButton style={{ width: '100%', height: '100%', flexDirection: 'row' }}>
+      <RectButton style={{ width: '100%', height: '100%', flexDirection: 'row' }} onPress={handlePress}>
         <View style={{ padding: 15, paddingRight: 0, width: width / 1.8 }}>
           <View style={{
             position: 'absolute', right: 30, top: -5, opacity: 0.4,

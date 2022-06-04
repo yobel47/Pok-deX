@@ -22,7 +22,7 @@ import {
 } from '../../assets/icons';
 
 function Logo({
-  name, onPress, height, width, style,
+  name, height, width, style,
 }) {
   let RenderIcon;
   switch (name) {
@@ -86,7 +86,6 @@ function Logo({
   return (
     <TouchableWithoutFeedback
       style={{ paddingHorizontal: 20, ...style }}
-      onPress={onPress}
     >
       {name ? (
         <RenderIcon height={height} width={width} style={{ color: 'white' }} />
