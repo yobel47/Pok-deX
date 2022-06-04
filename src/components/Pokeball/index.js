@@ -14,17 +14,17 @@ function Pokeball({
     Animated.loop(
       Animated.timing(rotate, {
         toValue: 360,
-        duration: 4500,
+        duration: 3000,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
     ).start();
     // Animated.loop(
     //   Animated.sequence([
-    //     Animated.timing(rotate, { toValue: 10, duration: 100, useNativeDriver: true }),
-    //     Animated.timing(rotate, { toValue: -10, duration: 100, useNativeDriver: true }),
-    //     Animated.timing(rotate, { toValue: 10, duration: 100, useNativeDriver: true }),
-    //     Animated.timing(rotate, { toValue: 0, duration: 100, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: 10, duration: 50, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: 0, duration: 50, useNativeDriver: true }),
+    //     Animated.timing(rotate, { toValue: -10, duration: 50, useNativeDriver: true }),
+
     //   ]),
     // ).start();
   }, [rotate]);

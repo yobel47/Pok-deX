@@ -76,9 +76,8 @@ function PokemonCard({ item, opacity }) {
           }}
           >
             {item.types.map((type) => (
-              <Tag key={type.url} type={type.name} />
+              <Tag key={type.url} type={type.name} height={10} width={10} />
             ))}
-
           </View>
         </View>
 

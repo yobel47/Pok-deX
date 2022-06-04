@@ -1,5 +1,5 @@
 import {
-  View, FlatList, Animated, Alert,
+  View, FlatList, Animated, Alert, StatusBar,
 } from 'react-native';
 import React, {
   useEffect, useState, useMemo, useCallback,
@@ -85,7 +85,9 @@ function Home() {
   ));
 
   return (
-    <View>
+    <View style={{ flex: 1, position: 'relative' }}>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
+      <View style={{ marginTop: 25 }} />
       {loadingInitalData ? (
         <>
           <Header />

@@ -3,7 +3,9 @@ import React from 'react';
 import Logo from '../Logo';
 import styles from '../../utils/styles';
 
-function Tag({ type }) {
+function Tag({
+  type, tagStyle, fontStyle, width, height,
+}) {
   return (
     <View style={{
       flexDirection: 'row',
@@ -13,10 +15,10 @@ function Tag({ type }) {
       padding: 5,
       marginTop: 2,
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
-      // opacity: 0.3,
+      ...tagStyle,
     }}
     >
-      <Logo name={type} width={10} height={10} />
+      <Logo name={type} width={width} height={height} />
       <Text
         style={{
           color: 'white',
@@ -24,6 +26,7 @@ function Tag({ type }) {
           textTransform: 'capitalize',
           opacity: 1,
           ...styles.pokemonType,
+          ...fontStyle,
         }}
       >
         {type}
