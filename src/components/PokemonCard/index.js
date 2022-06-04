@@ -1,6 +1,7 @@
 import {
-  View, Text, Image, Dimensions, Animated,
+  View, Text, Dimensions, Animated,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { RectButton } from 'react-native-gesture-handler';
 import React, { useMemo } from 'react';
 import styles from '../../utils/styles';
@@ -92,7 +93,7 @@ function PokemonCard({ item, opacity }) {
           marginLeft: -30,
         }}
         >
-          <Image
+          <FastImage
             style={{
               width: 150,
               height: 150,
@@ -105,4 +106,4 @@ function PokemonCard({ item, opacity }) {
   );
 }
 
-export default PokemonCard;
+export default React.memo(PokemonCard);

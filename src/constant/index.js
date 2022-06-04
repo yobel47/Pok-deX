@@ -19,4 +19,4 @@ export const POKEMON_TYPE_COLORS = {
   fairy: '#EE99AC',
 };
 
-export const API_OFFSET = 20;
+export const API_OFFSET = 5;

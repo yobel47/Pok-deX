@@ -26,64 +26,63 @@ function Logo({
 }) {
   let RenderIcon;
   switch (name) {
-    case 'bug':
+    case 'Bug':
       RenderIcon = Bug;
       break;
-    case 'dark':
+    case 'Dark':
       RenderIcon = Dark;
       break;
-    case 'dragon':
+    case 'Dragon':
       RenderIcon = Dragon;
       break;
-    case 'electric':
+    case 'Electric':
       RenderIcon = Electric;
       break;
-    case 'fairy':
+    case 'Fairy':
       RenderIcon = Fairy;
       break;
-    case 'fighting':
+    case 'Fighting':
       RenderIcon = Fighting;
       break;
-    case 'fire':
+    case 'Fire':
       RenderIcon = Fire;
       break;
-    case 'flying':
+    case 'Flying':
       RenderIcon = Flying;
       break;
-    case 'ghost':
+    case 'Ghost':
       RenderIcon = Ghost;
       break;
-    case 'grass':
+    case 'Grass':
       RenderIcon = Grass;
       break;
-    case 'ground':
+    case 'Ground':
       RenderIcon = Ground;
       break;
-    case 'ice':
+    case 'Ice':
       RenderIcon = Ice;
       break;
-    case 'normal':
+    case 'Normal':
       RenderIcon = Normal;
       break;
-    case 'poison':
+    case 'Poison':
       RenderIcon = Poison;
       break;
-    case 'psychic':
+    case 'Psychic':
       RenderIcon = Psychic;
       break;
-    case 'rock':
+    case 'Rock':
       RenderIcon = Rock;
       break;
-    case 'steel':
+    case 'Steel':
       RenderIcon = Steel;
       break;
-    case 'water':
+    case 'Water':
       RenderIcon = Water;
       break;
     default:
-      RenderIcon = Normal;
+      RenderIcon = Water;
   }
-
   return (
     <TouchableWithoutFeedback
       style={{ paddingHorizontal: 20, ...style }}
@@ -91,9 +90,8 @@ function Logo({
     >
       {name ? (
         <RenderIcon height={height} width={width} style={{ color: 'white' }} />
-
       ) : (
-        <Normal height={10} width={10} style={{ color: 'white' }} />
+        <Normal height={20} width={20} style={{ color: 'white' }} />
       )}
     </TouchableWithoutFeedback>
   );
