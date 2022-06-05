@@ -85,7 +85,7 @@ function Home() {
   ));
 
   return (
-    <View style={{ flex: 1, position: 'relative' }}>
+    <View>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       <View style={{ marginTop: 25 }} />
       {loadingInitalData ? (

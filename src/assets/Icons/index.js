@@ -19,6 +19,7 @@ import Psychic from './psychic.svg';
 import Rock from './rock.svg';
 import Steel from './steel.svg';
 import Water from './water.svg';
+import PokeballCatchImage from './pokeballCatch.svg';
 
 export {
   Dots,
@@ -42,4 +43,5 @@ export {
   Rock,
   Steel,
   Water,
+  PokeballCatchImage,
 };
