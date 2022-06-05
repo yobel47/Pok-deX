@@ -49,11 +49,6 @@ const getPokemonData = async (value) => {
     };
   });
 
-  const pokemonAbilityFormatted = pokemonData.abilities.map(({ ability }) => ({
-    name: capitalizeFirstLetter(ability.name),
-    url: ability.url,
-  }));
-
   // eslint-disable-next-line camelcase
   const eggGroupsFormatted = pokemonSpecieData.egg_groups.map((eggGroup) => ({
     name: capitalizeFirstLetter(eggGroup.name),
@@ -73,7 +68,6 @@ const getPokemonData = async (value) => {
     stats: pokemonStatsFormatted,
     height: pokemonData.height,
     weight: pokemonData.weight,
-    abilites: pokemonAbilityFormatted,
     gender_rate: pokemonSpecieData.gender_rate,
     egg_groups: eggGroupsFormatted,
   };

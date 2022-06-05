@@ -96,7 +96,7 @@ function Home() {
       ) : (
         <FlatList
           contentContainerStyle={{ paddingBottom: 20 }}
-          showsVerticalScrollIndicator
+          showsVerticalScrollIndicator={false}
           onRefresh={refreshList}
           refreshing={refreshing}
           data={pokemons}

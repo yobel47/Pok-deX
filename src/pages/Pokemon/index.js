@@ -1,7 +1,7 @@
 import {
-  Text, View, StatusBar, Dimensions, Animated,
+  View, StatusBar, Animated,
 } from 'react-native';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
@@ -9,14 +9,14 @@ import { BiggerDots } from '../../assets';
 import Header from './Header';
 import Summary from './Summary';
 import CatchAnimation from './CatchAnimation';
-
-const { height } = Dimensions.get('window');
+import Details from '../Details';
 
 function Pokemon() {
   const route = useRoute();
   const { item } = route.params;
 
   const translateY = useMemo(() => new Animated.Value(0), []);
+  const [open, setOpen] = useState(false);
 
   const animatedEvent = Animated.event(
     [
@@ -48,6 +48,7 @@ function Pokemon() {
         useNativeDriver: true,
       }).start(() => {
         translateY.extractOffset();
+        setOpen(opened);
       });
     }
   };
@@ -124,32 +125,7 @@ function Pokemon() {
               ...detailsStyle,
             }}
             >
-              <View style={{
-                height: height - (200 + 64),
-                backgroundColor: 'white',
-                borderTopLeftRadius: 32,
-                borderTopRightRadius: 32,
-                paddingVertical: 16,
-              }}
-              >
-                <View style={{
-                  paddingTop: 16,
-                  paddingBottom: 24,
-                  marginHorizontal: 24,
-                  borderBottomWidth: 1,
-                  borderStyle: 'solid',
-                  borderColor: 'lightgrey',
-                  position: 'relative',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                }}
-                >
-                  <Text>asd</Text>
-
-                </View>
-
-              </View>
+              <Details open={open} item={item} />
             </Animated.View>
           </PanGestureHandler>
 

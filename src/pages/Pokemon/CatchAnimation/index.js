@@ -101,7 +101,7 @@ function CatchAnimation({ translateY, item }) {
     ],
   };
 
-  const gacha = () => {
+  const gacha = useCallback(() => {
     const get = (Math.floor(Math.random() * 100));
     if (get >= 50) {
       setModalVisible(true);
@@ -110,7 +110,7 @@ function CatchAnimation({ translateY, item }) {
       setModalVisible(true);
       setPrize(false);
     }
-  };
+  }, []);
 
   const modalColor = useMemo(
     () => getColorByPokemonType(item.types[0].name),
