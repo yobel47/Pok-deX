@@ -5,7 +5,9 @@ import React, { useMemo, useCallback, useEffect } from 'react';
 
 import { pokeballImages } from '../../../assets';
 
-function PokeballCatch({ translateY, onPress, getPokemon }) {
+function PokeballCatch({
+  translateY, onPress, getPokemon, setGetPokemon,
+}) {
   const rotate = useMemo(() => new Animated.Value(0), []);
   const translateYPokeball = useMemo(() => new Animated.Value(0), []);
 
@@ -41,7 +43,7 @@ function PokeballCatch({ translateY, onPress, getPokemon }) {
       toValue: 0,
       duration: 400,
       useNativeDriver: true,
-    }).start();
+    }).start(setGetPokemon(false));
   }, [translateYPokeball]);
 
   const pokemonCatchStyle = {
@@ -84,14 +86,13 @@ function PokeballCatch({ translateY, onPress, getPokemon }) {
   };
 
   return (
-
     <Animated.View style={pokemonCatchTranslateStyle}>
       <TouchableWithoutFeedback
         style={{
           position: 'absolute', alignSelf: 'center', bottom: 20,
         }}
         onPress={() => {
-          if (getPokemon) {
+          if (!getPokemon) {
             movePokeball();
           }
           onPress();
@@ -107,11 +108,10 @@ function PokeballCatch({ translateY, onPress, getPokemon }) {
             bottom: 20,
           }}
         />
-
       </TouchableWithoutFeedback>
     </Animated.View>
 
   );
 }
 
-export default PokeballCatch;
+export default React.memo(PokeballCatch);

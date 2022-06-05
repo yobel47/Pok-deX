@@ -155,7 +155,7 @@ function Pokemon() {
 
         </View>
       </View>
-      <CatchAnimation translateY={translateY} />
+      <CatchAnimation translateY={translateY} item={item} />
     </>
   );
 }
