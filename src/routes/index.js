@@ -1,8 +1,8 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { Home, Pokemon } from '../pages';
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 function Routes() {
   return (
@@ -19,6 +19,27 @@ function Routes() {
       <Stack.Screen
         name="Pokemon"
         component={Pokemon}
+        options={{
+          cardStyleInterpolator: ({ current }) => ({
+            cardStyle: {
+              opacity: current.progress,
+            },
+          }),
+        }}
+        sharedElements={(route) => {
+          const { item } = route.params;
+
+          const sharedArray = [
+            {
+              id: `item.${item.id}.image`,
+            },
+            {
+              id: `item.${item.id}.name`,
+            },
+          ];
+
+          return sharedArray;
+        }}
       />
     </Stack.Navigator>
   );

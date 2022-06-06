@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 import { RectButton } from 'react-native-gesture-handler';
 import React, { useMemo, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 import styles from '../../utils/styles';
 import Pokeball from '../Pokeball';
 import { Dots } from '../../assets';
@@ -63,11 +64,16 @@ function PokemonCard({ item, opacity }) {
             />
           </View>
           <View style={{ marginLeft: 10 }}>
-            <Text style={{ ...styles.pokemonNumber }}>
+            <Text style={{ ...styles.pokemonNumber, color: 'white' }}>
               #
               {item.pokedex_number}
             </Text>
-            <Text style={{ ...styles.pokemonName }}>{item.name}</Text>
+            <SharedElement
+              id={`item.${item.id}.name`}
+              style={{ alignItems: 'flex-start' }}
+            >
+              <Text style={{ ...styles.pokemonName, color: 'white' }}>{item.name}</Text>
+            </SharedElement>
           </View>
           <View style={{
             flexDirection: 'row',
@@ -96,13 +102,19 @@ function PokemonCard({ item, opacity }) {
           marginLeft: -30,
         }}
         >
-          <FastImage
-            style={{
-              width: 150,
-              height: 150,
-            }}
-            source={{ uri: item.image }}
-          />
+          <SharedElement
+            id={`item.${item.id}.image`}
+            style={{ position: 'absolute' }}
+          >
+            <FastImage
+              style={{
+                width: 150,
+                height: 150,
+              }}
+              source={{ uri: item.image }}
+            />
+          </SharedElement>
+
         </View>
       </RectButton>
     </Animated.View>

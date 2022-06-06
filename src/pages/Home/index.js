@@ -19,7 +19,6 @@ function Home() {
   const [refreshing, setRefreshing] = useState(false);
 
   const opacity = useMemo(() => new Animated.Value(0), []);
-  // const translateY = useMemo(() => new Animated.Value(50), []);
 
   const loadPokemons = useCallback(
     async (refresh) => {
@@ -43,11 +42,6 @@ function Home() {
             useNativeDriver: true,
           }),
 
-          // Animated.timing(translateY, {
-          //   toValue: 0,
-          //   duration: 700,
-          //   useNativeDriver: true,
-          // }),
         ]).start();
       } catch (err) {
         Alert.alert(

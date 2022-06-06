@@ -3,13 +3,13 @@ import {
 } from 'react-native';
 import React, { useMemo, useEffect } from 'react';
 import FastImage from 'react-native-fast-image';
+import { SharedElement } from 'react-navigation-shared-element';
 import { Pokeball, Tag } from '../../../components';
 import styles from '../../../utils/styles';
 
 function Summary({ item, translateY }) {
   const translateXNumber = useMemo(() => new Animated.Value(100), []);
   const translateXGenera = useMemo(() => new Animated.Value(200), []);
-  const translateXName = useMemo(() => new Animated.Value(100), []);
   const translateXTags = useMemo(() => new Animated.Value(200), []);
 
   useEffect(() => {
@@ -26,12 +26,7 @@ function Summary({ item, translateY }) {
         useNativeDriver: true,
         easing: Easing.inOut(Easing.quad),
       }),
-      Animated.timing(translateXName, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-        easing: Easing.inOut(Easing.quad),
-      }),
+
       Animated.timing(translateXTags, {
         toValue: 0,
         duration: 300,
@@ -39,7 +34,7 @@ function Summary({ item, translateY }) {
         easing: Easing.inOut(Easing.quad),
       }),
     ]).start();
-  }, [translateXNumber, translateXGenera, translateXName, translateXTags]);
+  }, [translateXNumber, translateXGenera, translateXTags]);
 
   const pokedexNumberStyle = {
     transform: [
@@ -59,18 +54,6 @@ function Summary({ item, translateY }) {
         translateX: translateXGenera.interpolate({
           inputRange: [0, 200],
           outputRange: [0, 200],
-          extrapolate: 'clamp',
-        }),
-      },
-    ],
-  };
-
-  const pokedexNameStyle = {
-    transform: [
-      {
-        translateX: translateXName.interpolate({
-          inputRange: [0, 100],
-          outputRange: [0, -200],
           extrapolate: 'clamp',
         }),
       },
@@ -135,10 +118,14 @@ function Summary({ item, translateY }) {
           justifyContent: 'space-between',
         }}
         >
-          <Animated.View style={pokedexNameStyle}>
-            <Text style={{ ...styles.applicationTitle, color: 'white' }}>{item.name}</Text>
-
-          </Animated.View>
+          <View>
+            <SharedElement
+              id={`item.${item.id}.name`}
+              style={{ alignItems: 'flex-start' }}
+            >
+              <Text style={{ ...styles.applicationTitle, color: 'white' }}>{item.name}</Text>
+            </SharedElement>
+          </View>
           <Animated.View style={pokedexNumberStyle}>
             <Text style={{ ...styles.pokemonNumber, color: 'white', fontSize: 20 }}>
               #
@@ -190,13 +177,15 @@ function Summary({ item, translateY }) {
               alignSelf: 'center',
             }}
           />
-          <FastImage
-            style={{
-              width: 256,
-              height: 256,
-            }}
-            source={{ uri: item.image }}
-          />
+          <SharedElement id={`item.${item.id}.image`}>
+            <FastImage
+              style={{
+                width: 256,
+                height: 256,
+              }}
+              source={{ uri: item.image }}
+            />
+          </SharedElement>
         </Animated.View>
       </View>
     </Animated.View>
