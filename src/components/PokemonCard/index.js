@@ -31,7 +31,7 @@ function PokemonCard({ item, opacity }) {
   };
 
   const handlePress = useCallback(() => {
-    navigation.navigate('Pokemon', { item });
+    navigation.navigate('Pokemon', { item, from: 'card' });
   }, [item]);
 
   return (

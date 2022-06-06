@@ -27,18 +27,22 @@ function Routes() {
           }),
         }}
         sharedElements={(route) => {
-          const { item } = route.params;
+          const { item, from } = route.params;
 
-          const sharedArray = [
-            {
-              id: `item.${item.id}.image`,
-            },
-            {
-              id: `item.${item.id}.name`,
-            },
-          ];
+          if (from === 'card') {
+            const sharedArray = [
+              {
+                id: `item.${item.id}.image`,
+              },
+              {
+                id: `item.${item.id}.name`,
+              },
+            ];
 
-          return sharedArray;
+            return sharedArray;
+          }
+
+          return undefined;
         }}
       />
     </Stack.Navigator>
