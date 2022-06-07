@@ -4,6 +4,7 @@ import {
 import React from 'react';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 import { pokeballHeader, pokeball } from '../../assets';
 import styles from '../../utils/styles';
 import SearchBar from '../SearchBar';
@@ -20,30 +21,36 @@ function Header() {
         style={{ width, height: height / 4, marginTop: -20 }}
         source={pokeballHeader}
       />
-      <View style={{
-        width: 55,
-        height: 55,
-        borderRadius: 100,
-        backgroundColor: '#f4c41e',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: 36,
-        right: 38,
-        overflow: 'hidden',
-      }}
+      <SharedElement
+        id="item.profile"
+        style={{
+          position: 'absolute',
+          top: 36,
+          right: 38,
+        }}
       >
-        <RectButton
-          onPress={() => { navigation.navigate('Profile'); }}
+        <View style={{
+          width: 55,
+          height: 55,
+          borderRadius: 100,
+          backgroundColor: '#f4c41e',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}
         >
+          <RectButton
+            onPress={() => { navigation.navigate('Profile'); }}
+          >
 
-          <Image
-            source={pokeball}
-            style={{
-              width: 50, height: 50, alignSelf: 'center',
-            }}
-          />
-        </RectButton>
-      </View>
+            <Image
+              source={pokeball}
+              style={{
+                width: 50, height: 50, alignSelf: 'center',
+              }}
+            />
+          </RectButton>
+        </View>
+      </SharedElement>
 
       <View style={{
         marginTop: -80,

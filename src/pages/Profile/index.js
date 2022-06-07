@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { SharedElement } from 'react-navigation-shared-element';
 import { pokeballHeader, pokeball } from '../../assets';
 import styles from '../../utils/styles';
 import { databaseRef } from '../../api/services/firebase';
@@ -59,6 +60,7 @@ function Profile() {
         'Fail to get Pokémons',
         'An error has ocurred when try to load the Pokémons, please try again.',
       );
+      console.log(err);
     }
   }, [pokebagId, opacity]);
 
@@ -84,24 +86,28 @@ function Profile() {
           style={{ width, height: height / 4, marginTop: -20 }}
           source={pokeballHeader}
         />
-        <View style={{
-          width: 150,
-          height: 150,
-          borderRadius: 100,
-          backgroundColor: '#f4c41e',
-          justifyContent: 'center',
-          overflow: 'hidden',
-          alignSelf: 'center',
-          marginTop: -90,
-        }}
+        <SharedElement
+          id="item.profile"
         >
-          <Image
-            source={pokeball}
-            style={{
-              width: 140, height: 140, alignSelf: 'center',
-            }}
-          />
-        </View>
+          <View style={{
+            width: 150,
+            height: 150,
+            borderRadius: 100,
+            backgroundColor: '#f4c41e',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            alignSelf: 'center',
+            marginTop: -90,
+          }}
+          >
+            <Image
+              source={pokeball}
+              style={{
+                width: 140, height: 140, alignSelf: 'center',
+              }}
+            />
+          </View>
+        </SharedElement>
 
         <View>
           <Text style={{

@@ -32,18 +32,20 @@ function Routes() {
       <Stack.Screen
         name="Profile"
         component={Profile}
+        sharedElements={() => {
+          const sharedArray = [
+            {
+              id: 'item.profile',
+            },
+          ];
+
+          return sharedArray;
+        }}
       />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
         name="Pokemon"
         component={Pokemon}
-        options={{
-          cardStyleInterpolator: ({ current }) => ({
-            cardStyle: {
-              opacity: current.progress,
-            },
-          }),
-        }}
         sharedElements={(route) => {
           const { item, from } = route.params;
 

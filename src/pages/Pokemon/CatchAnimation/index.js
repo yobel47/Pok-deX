@@ -34,7 +34,7 @@ function CatchAnimation({ translateY, item }) {
       duration: 500,
       useNativeDriver: true,
     }).start(onRotatePokeball);
-  }, []);
+  }, [translateYDarker, scalePokeball, translateYPokeball]);
 
   const onRotatePokeball = useCallback(() => {
     Animated.sequence([
@@ -49,7 +49,7 @@ function CatchAnimation({ translateY, item }) {
         { iterations: 1 },
       ),
     ]).start(gacha);
-  }, []);
+  }, [rotatePokeball]);
 
   const onLighter = useCallback(() => {
     Animated.timing(scalePokeball, {
@@ -66,8 +66,8 @@ function CatchAnimation({ translateY, item }) {
       toValue: 0,
       duration: 300,
       useNativeDriver: true,
-    }).start(setGetPokemon(true));
-  }, []);
+    }).start(() => { setGetPokemon(!prize); console.log(prize); });
+  }, [scalePokeball, translateYPokeball, translateYDarker, prize]);
 
   const darkerStyle = {
     translateY: translateYDarker.interpolate({
@@ -102,14 +102,16 @@ function CatchAnimation({ translateY, item }) {
   };
 
   const gacha = useCallback(() => {
-    const get = (Math.floor(Math.random() * 100));
-    if (get >= 50) {
-      setModalVisible(true);
-      setPrize(true);
-    } else {
-      setModalVisible(true);
-      setPrize(false);
-    }
+    setTimeout(() => {
+      const get = (Math.floor(Math.random() * 100));
+      if (get >= 50) {
+        setModalVisible(true);
+        setPrize(true);
+      } else {
+        setModalVisible(true);
+        setPrize(false);
+      }
+    }, 800);
   }, []);
 
   const modalColor = useMemo(
@@ -210,7 +212,6 @@ function CatchAnimation({ translateY, item }) {
           </View>
         </View>
       </Modal>
-
     </>
   );
 }
