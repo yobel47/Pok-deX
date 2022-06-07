@@ -1,5 +1,5 @@
 import {
-  View, Text, ImageBackground, Dimensions, StatusBar, ScrollView, Alert,
+  View, Text, ImageBackground, Dimensions, StatusBar, ScrollView, Alert, Keyboard,
 } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import {
@@ -99,7 +99,7 @@ function Login() {
 
                 <Formik
                   initialValues={{ email: '', password: '' }}
-                  onSubmit={(value) => { setLoading(true); onSubmit(value); }}
+                  onSubmit={(value) => { Keyboard.dismiss(); setLoading(true); onSubmit(value); }}
                   validationSchema={loginSchema}
                 >
                   {({

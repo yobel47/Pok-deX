@@ -1,7 +1,7 @@
 import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import {
-  Home, Pokemon, Login, Register, Splash,
+  Home, Pokemon, Login, Register, Splash, Profile,
 } from '../pages';
 
 const Stack = createSharedElementStackNavigator();
@@ -28,6 +28,10 @@ function Routes() {
       <Stack.Screen
         name="Register"
         component={Register}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
       />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen

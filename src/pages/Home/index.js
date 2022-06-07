@@ -41,7 +41,6 @@ function Home() {
             duration: 600,
             useNativeDriver: true,
           }),
-
         ]).start();
       } catch (err) {
         Alert.alert(
