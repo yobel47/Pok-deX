@@ -166,18 +166,21 @@ function Summary({ item, translateY }) {
             <Text style={{ ...styles.description, color: 'white', fontSize: 18 }}>{item.genera}</Text>
           </Animated.View>
         </View>
-        <Animated.View style={{ marginTop: 24, alignItems: 'center', ...pokemonImageContainerStyle }}>
+        <Animated.View style={{ marginTop: 12, alignItems: 'center', ...pokemonImageContainerStyle }}>
           <Pokeball
             width={250}
             height={250}
             withRotate
             style={{
               position: 'absolute',
-              bottom: 0,
+              bottom: -40,
               alignSelf: 'center',
             }}
           />
-          <SharedElement id={`item.${item.id}.image`}>
+          <SharedElement
+            id={`item.${item.id}.image`}
+            style={{ top: 40 }}
+          >
             <FastImage
               style={{
                 width: 256,

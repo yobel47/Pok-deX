@@ -5,7 +5,7 @@ import React, { useMemo, useCallback, useEffect } from 'react';
 import { pokeball } from '../../assets';
 
 function Pokeball({
-  withRotate, width, height, style,
+  withRotate, width, height, style, ballStyle,
 }) {
   const pokeballOpacity = useMemo(() => new Animated.Value(0), []);
   const rotate = useMemo(() => new Animated.Value(0), []);
@@ -65,7 +65,7 @@ function Pokeball({
       <Animated.Image
         source={pokeball}
         style={{
-          width, height, tintColor: 'white', opacity: 0.2,
+          width, height, tintColor: 'white', opacity: 0.2, ...ballStyle,
         }}
       />
     </Animated.View>

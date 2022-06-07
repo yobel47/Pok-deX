@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "41326253228",
+    "project_id": "pokedex-f7e95",
+    "storage_bucket": "pokedex-f7e95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41326253228:android:f8746bfa2f0d0727d33b09",
+        "android_client_info": {
+          "package_name": "com.challenge8"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41326253228-roop5bs4bfi35ltj4hp741lkjfff56d9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.challenge8",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "41326253228-n1q6isk1vb98gtqlslo5lbn4e2t28udv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqCM3cCfSoSY0bHccPRSlne9WjaXdEnRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41326253228-n1q6isk1vb98gtqlslo5lbn4e2t28udv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
-import { Home, Pokemon } from '../pages';
+import {
+  Home, Pokemon, Login, Register, Splash,
+} from '../pages';
 
 const Stack = createSharedElementStackNavigator();
 
@@ -15,6 +17,18 @@ function Routes() {
         },
       }}
     >
+      <Stack.Screen
+        name="Splash"
+        component={Splash}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+      />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
         name="Pokemon"
