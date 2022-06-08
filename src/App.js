@@ -5,7 +5,10 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import codePush from 'react-native-code-push';
 import Routes from './routes';
+
+const codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START };
 
 const theme = {
   ...DefaultTheme,
@@ -39,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default codePush(codePushOptions)(App);

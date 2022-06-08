@@ -94,7 +94,6 @@ function Login() {
                 }}
                 >
                   Login
-
                 </Text>
 
                 <Formik
