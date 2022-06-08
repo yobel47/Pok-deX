@@ -12,4 +12,4 @@ function Loading({ size, color, style }) {
   );
 }
 
-export default Loading;
+export default React.memo(Loading);
