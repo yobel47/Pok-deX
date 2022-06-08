@@ -16,6 +16,7 @@ import { pokedex } from '../../assets';
 import { Input, Loading } from '../../components';
 import { capitalizeFirstLetter } from '../../api/utils';
 import { databaseRef, login } from '../../api/services/firebase';
+import { storeData } from '../../utils/localStorage';
 
 const { height, width } = Dimensions.get('window');
 
@@ -40,7 +41,7 @@ function Login() {
             analytics().setUserId(resDB.val().uid);
             analytics().setUserProperty('Login_with', 'Email_Password');
             if (resDB.val()) {
-              // storeData('user', resDB.val());
+              storeData('user', resDB.val());
               navigation.replace('Home');
               Alert.alert('Login Success');
             }

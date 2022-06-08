@@ -9,6 +9,8 @@ import {
   PokemonCard, Loading, Header,
 } from '../../components';
 import { API_OFFSET } from '../../constant';
+import { getData } from '../../utils/localStorage';
+import { pokeball } from '../../assets';
 
 function Home() {
   const [pokemons, setPokemons] = useState([]);
@@ -17,6 +19,12 @@ function Home() {
   const [loadingInitalData, setLoadingInitialData] = useState(true);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [profile, setProfile] = useState({
+    photo: pokeball,
+    fullname: '',
+    bio: '',
+    uid: '',
+  });
 
   const opacity = useMemo(() => new Animated.Value(0), []);
 
@@ -52,8 +60,17 @@ function Home() {
     [pokemons, loadingInitalData, offset, counter, opacity],
   );
 
+  const getUserData = () => {
+    getData('user').then((res) => {
+      const data = res;
+      data.photo = res?.photo?.length !== 5 ? { uri: res.photo } : pokeball;
+      setProfile(res);
+    });
+  };
+
   useEffect(() => {
     loadPokemons();
+    getUserData();
   }, []);
 
   const footer = useMemo(
@@ -71,7 +88,6 @@ function Home() {
     setRefreshing(false);
   }, [loadPokemons]);
 
-  // const memoizedValue = useMemo(() => renderItem, [pokemons]);
   const keyExt = useCallback((item) => item.id);
   const renderItem = useCallback(({ item }) => (
     <PokemonCard item={item} opacity={opacity} />
@@ -83,7 +99,7 @@ function Home() {
       <View style={{ marginTop: 25 }} />
       {loadingInitalData ? (
         <>
-          <Header />
+          <Header data={profile} />
           <Loading size="large" color="grey" style={{ marginTop: 40 }} />
         </>
       ) : (
@@ -97,7 +113,7 @@ function Home() {
           onEndReachedThreshold={0.9}
           keyExtractor={keyExt}
           renderItem={renderItem}
-          ListHeaderComponent={Header}
+          ListHeaderComponent={<Header data={profile} />}
           ListFooterComponent={footer}
         />
       )}

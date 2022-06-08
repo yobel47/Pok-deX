@@ -3,6 +3,7 @@ import {
 } from 'react-native';
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 import { pokedex } from '../../assets';
 import { Pokeball } from '../../components';
 
@@ -11,9 +12,22 @@ function Splash() {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.replace('Login');
     }, 1500);
-  }, []);
+    const subscriber = auth().onAuthStateChanged((user) => {
+      if (user) {
+        setTimeout(() => {
+          navigation.replace('Home');
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          navigation.replace('Login');
+        }, 1500);
+      }
+    });
+
+    return subscriber();
+  }, [navigation]);
 
   return (
     <>

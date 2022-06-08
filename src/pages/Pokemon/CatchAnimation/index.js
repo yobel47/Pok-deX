@@ -1,22 +1,45 @@
 import {
   Animated, Dimensions, Text, Modal, View, TouchableOpacity,
 } from 'react-native';
-import React, { useState, useCallback, useMemo } from 'react';
-import { pokeballImages } from '../../../assets';
+import React, {
+  useState, useCallback, useMemo, useEffect,
+} from 'react';
+import { pokeballImages, pokeballRelease } from '../../../assets';
 import PokeballCatch from '../PokeballCatch';
+import PokeballRelease from '../PokeballRelease';
 import styles from '../../../utils/styles';
 import getColorByPokemonType from '../../../utils/getColorByPokemonType';
+import { getPokebagId } from '../../../api/services/firebase';
 
 const { height, width } = Dimensions.get('window');
 
-function CatchAnimation({ translateY, item }) {
+function CatchAnimation({
+  translateY, item,
+}) {
+  const [isCatch, setIsCatch] = useState(false);
   const [getPokemon, setGetPokemon] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [initial, setInitial] = useState(false);
   const [prize, setPrize] = useState(false);
   const translateYDarker = useMemo(() => new Animated.Value(0), []);
   const translateYPokeball = useMemo(() => new Animated.Value(0), []);
   const rotatePokeball = useMemo(() => new Animated.Value(0), []);
   const scalePokeball = useMemo(() => new Animated.Value(0), []);
+  const [, setPokebagId] = useState([]);
+
+  const getId = () => {
+    getPokebagId().then((value) => {
+      setPokebagId(value.sort());
+      if (!value.includes(item.id)) {
+        setIsCatch(true);
+      }
+      setInitial(true);
+    });
+  };
+
+  useEffect(() => {
+    getId();
+  }, []);
 
   const onDarker = useCallback(() => {
     Animated.timing(translateYDarker, {
@@ -33,7 +56,9 @@ function CatchAnimation({ translateY, item }) {
       toValue: height,
       duration: 500,
       useNativeDriver: true,
-    }).start(onRotatePokeball);
+    }).start(() => {
+      onRotatePokeball();
+    });
   }, [translateYDarker, scalePokeball, translateYPokeball]);
 
   const onRotatePokeball = useCallback(() => {
@@ -46,7 +71,7 @@ function CatchAnimation({ translateY, item }) {
           Animated.timing(rotatePokeball, { toValue: 10, duration: 100, useNativeDriver: true }),
           Animated.timing(rotatePokeball, { toValue: 0, duration: 100, useNativeDriver: true }),
         ]),
-        { iterations: 1 },
+        { iterations: 2 },
       ),
     ]).start(gacha);
   }, [rotatePokeball]);
@@ -66,8 +91,8 @@ function CatchAnimation({ translateY, item }) {
       toValue: 0,
       duration: 300,
       useNativeDriver: true,
-    }).start(() => { setGetPokemon(!prize); console.log(prize); });
-  }, [scalePokeball, translateYPokeball, translateYDarker, prize]);
+    }).start(setGetPokemon(!prize));
+  }, [scalePokeball, translateYPokeball, translateYDarker, prize, getPokemon]);
 
   const darkerStyle = {
     translateY: translateYDarker.interpolate({
@@ -119,14 +144,50 @@ function CatchAnimation({ translateY, item }) {
     [item.types],
   );
 
+  const checkTitle = () => {
+    if (isCatch) {
+      if (prize) {
+        return 'Congratulations';
+      }
+      return 'Sorry';
+    }
+    return 'Congratulations';
+  };
+
+  const checkText = () => {
+    if (isCatch) {
+      if (prize) {
+        return 'You got';
+      }
+      return 'You lose';
+    }
+    return 'You release';
+  };
+
   return (
     <>
-      <PokeballCatch
+      {initial && (isCatch ? (
+        <PokeballCatch
+          translateY={translateY}
+          onPress={onDarker}
+          getPokemon={getPokemon}
+          setGetPokemon={setGetPokemon}
+        />
+      ) : (
+        <PokeballRelease
+          translateY={translateY}
+          onPress={onDarker}
+          getPokemon={getPokemon}
+          setGetPokemon={setGetPokemon}
+        />
+      )) }
+
+      {/* <PokeballCatch
         translateY={translateY}
         onPress={onDarker}
         getPokemon={getPokemon}
         setGetPokemon={setGetPokemon}
-      />
+      /> */}
 
       <Animated.View style={{
         backgroundColor: 'rgba(0,0,0,0.6)',
@@ -138,13 +199,13 @@ function CatchAnimation({ translateY, item }) {
       />
 
       <Animated.Image
-        source={pokeballImages}
+        source={isCatch ? pokeballImages : pokeballRelease}
         style={{
           position: 'absolute',
           alignSelf: 'center',
           width: 275,
           height: 275,
-          top: 205,
+          top: 235,
           ...pokeballAnimationStyle,
         }}
       />
@@ -178,11 +239,11 @@ function CatchAnimation({ translateY, item }) {
           }}
           >
             <Text style={{ ...styles.applicationTitle }}>
-              {prize ? 'Congratulations' : 'Sorry'}
+              { checkTitle() }
               !
             </Text>
             <Text style={{ ...styles.pokemonName, textAlign: 'center' }}>
-              {prize ? 'You got' : 'You lose'}
+              { checkText() }
               {' '}
               {item.name}
               {' '}

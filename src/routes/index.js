@@ -29,6 +29,7 @@ function Routes() {
         name="Register"
         component={Register}
       />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
         name="Profile"
         component={Profile}
@@ -42,7 +43,6 @@ function Routes() {
           return sharedArray;
         }}
       />
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
         name="Pokemon"
         component={Pokemon}

@@ -5,13 +5,13 @@ import React from 'react';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { pokeballHeader, pokeball } from '../../assets';
+import { pokeballHeader } from '../../assets';
 import styles from '../../utils/styles';
 import SearchBar from '../SearchBar';
 
 const { height, width } = Dimensions.get('screen');
 
-function Header() {
+function Header({ data }) {
   const navigation = useNavigation();
 
   return (
@@ -39,11 +39,11 @@ function Header() {
         }}
         >
           <RectButton
-            onPress={() => { navigation.navigate('Profile'); }}
+            onPress={() => { navigation.navigate('Profile', { data }); }}
           >
 
             <Image
-              source={pokeball}
+              source={data.photo}
               style={{
                 width: 50, height: 50, alignSelf: 'center',
               }}
