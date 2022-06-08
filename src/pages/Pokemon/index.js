@@ -1,7 +1,7 @@
 import {
   View, StatusBar, Animated,
 } from 'react-native';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
 import getColorByPokemonType from '../../utils/getColorByPokemonType';
@@ -10,6 +10,7 @@ import Header from './Header';
 import Summary from './Summary';
 import CatchAnimation from './CatchAnimation';
 import Details from '../Details';
+import { onLogScreenView } from '../../utils/onLogScreenView';
 
 function Pokemon() {
   const route = useRoute();
@@ -28,6 +29,10 @@ function Pokemon() {
     ],
     { useNativeDriver: true },
   );
+
+  useEffect(() => {
+    onLogScreenView('Pokemon');
+  }, []);
 
   const onHandlerStateChanged = (event) => {
     if (event.nativeEvent.oldState === State.ACTIVE) {

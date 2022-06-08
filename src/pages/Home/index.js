@@ -11,6 +11,7 @@ import {
 import { API_OFFSET } from '../../constant';
 import { getData } from '../../utils/localStorage';
 import { pokeball } from '../../assets';
+import { onLogScreenView } from '../../utils/onLogScreenView';
 
 function Home() {
   const [pokemons, setPokemons] = useState([]);
@@ -71,6 +72,7 @@ function Home() {
   useEffect(() => {
     loadPokemons();
     getUserData();
+    onLogScreenView('Home');
   }, []);
 
   const footer = useMemo(

@@ -4,7 +4,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {
-  useState, useCallback,
+  useState, useCallback, useEffect,
 } from 'react';
 import { launchImageLibrary } from 'react-native-image-picker';
 import {
@@ -20,6 +20,7 @@ import { pokeball } from '../../assets';
 import { Input, Loading } from '../../components';
 import { capitalizeFirstLetter } from '../../api/utils';
 import { register, databaseRef } from '../../api/services/firebase';
+import { onLogScreenView } from '../../utils/onLogScreenView';
 
 const { height, width } = Dimensions.get('screen');
 const { wHeight, wWidth } = Dimensions.get('window');
@@ -86,6 +87,10 @@ function Register() {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    onLogScreenView('Register');
+  }, []);
 
   return (
     <>

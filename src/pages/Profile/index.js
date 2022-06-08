@@ -10,12 +10,14 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import { SharedElement } from 'react-navigation-shared-element';
 import auth from '@react-native-firebase/auth';
+import analytics from '@react-native-firebase/analytics';
 import { pokeballHeader } from '../../assets';
 import styles from '../../utils/styles';
 import { getPokebagId } from '../../api/services/firebase';
 import { Loading, PokemonCard } from '../../components';
 import PokebagController from '../../api/controllers/Pokebag';
 import { removeData } from '../../utils/localStorage';
+import { onLogScreenView } from '../../utils/onLogScreenView';
 
 const { height, width } = Dimensions.get('screen');
 
@@ -72,6 +74,7 @@ function Profile() {
           index: 0,
           routes: [{ name: 'Login' }],
         }));
+        analytics().logEvent('Logout');
       })
       .catch((err) => {
         Alert.alert(err.message);
@@ -81,6 +84,7 @@ function Profile() {
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       getId();
+      onLogScreenView('Profile');
     });
     return unsubscribe;
   }, [navigation]);

@@ -17,6 +17,7 @@ import { Input, Loading } from '../../components';
 import { capitalizeFirstLetter } from '../../api/utils';
 import { databaseRef, login } from '../../api/services/firebase';
 import { storeData } from '../../utils/localStorage';
+import { onLogScreenView } from '../../utils/onLogScreenView';
 
 const { height, width } = Dimensions.get('screen');
 
@@ -35,11 +36,9 @@ function Login() {
           .ref(`users/${res.user.uid}/`)
           .once('value')
           .then((resDB) => {
-            analytics().logEvent('Login', {
-              method: 'Email_Password',
-            });
+            analytics().logEvent('Login');
+            onLogScreenView('Login');
             analytics().setUserId(resDB.val().uid);
-            analytics().setUserProperty('Login_with', 'Email_Password');
             if (resDB.val()) {
               storeData('user', resDB.val());
               navigation.replace('Home');
