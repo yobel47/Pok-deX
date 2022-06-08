@@ -32,7 +32,9 @@ function Profile() {
   const [pokebagData, setPokebagData] = useState([]);
   const [loadingInitalData, setLoadingInitialData] = useState(true);
 
-  const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
+  const handleGoBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
   const getId = () => {
     try {
