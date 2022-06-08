@@ -63,7 +63,7 @@ function Header({ data }) {
         <Text style={{ color: 'grey', ...styles.description }}>
           Search for Pokémon by name or using the National Pokédex number.
         </Text>
-        <SearchBar />
+        <SearchBar profile={data} />
       </View>
     </View>
   );

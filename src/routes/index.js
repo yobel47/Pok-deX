@@ -33,15 +33,11 @@ function Routes() {
       <Stack.Screen
         name="Profile"
         component={Profile}
-        sharedElements={() => {
-          const sharedArray = [
-            {
-              id: 'item.profile',
-            },
-          ];
-
-          return sharedArray;
-        }}
+        sharedElements={() => [
+          {
+            id: 'item.profile',
+          },
+        ]}
       />
       <Stack.Screen
         name="Pokemon"
@@ -50,7 +46,7 @@ function Routes() {
           const { item, from } = route.params;
 
           if (from === 'card') {
-            const sharedArray = [
+            return [
               {
                 id: `item.${item.id}.image`,
               },
@@ -58,8 +54,6 @@ function Routes() {
                 id: `item.${item.id}.name`,
               },
             ];
-
-            return sharedArray;
           }
 
           return undefined;

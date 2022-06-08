@@ -1,5 +1,5 @@
 import pokeApi from '../services/pokeApi';
-import getPokemonImageById from './getPokemonImageById';
+import getPokemonImage from './getPokemonImage';
 import capitalizeFirstLetter from './capitalizeFirstLetter';
 
 const getPokemonData = async (value) => {
@@ -60,7 +60,7 @@ const getPokemonData = async (value) => {
     name: pokemonSpecieData.names[pokemonNameIndex].name,
     description:
       pokemonSpecieData.flavor_text_entries[pokemonFlavorTextIndex].flavor_text,
-    image: getPokemonImageById(String(pokemonData.id)),
+    image: getPokemonImage(String(pokemonData.id)),
     genera: pokemonSpecieData.genera[pokemonGeneraIndex].genus,
     pokedex_number: pokemonData.id.toString().padStart(3, '0'),
     base_experience: pokemonData.base_experience,

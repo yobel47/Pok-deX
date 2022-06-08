@@ -14,7 +14,7 @@ function Input({
         theme={{ roundness: 20 }}
         onChangeText={onChangeText}
         value={value}
-        secureTextEntry={placeholder === 'Password' && true}
+        secureTextEntry={placeholder === 'Password'}
         left={(
           <TextInput.Icon name={icon} />
         )}

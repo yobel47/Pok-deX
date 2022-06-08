@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import { TouchableWithoutFeedback, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import SearchPokemonController from '../../api/controllers/SearchPokemon';
+import SearchPokemonController from '../../api/controllers/SearchPokemonController';
 import { Search } from '../../assets';
 import Loading from '../Loading';
 
-function SearchBar() {
+function SearchBar({ profile }) {
   const navigation = useNavigation();
 
   const [input, setInput] = useState('');
@@ -17,6 +17,7 @@ function SearchBar() {
       .then((item) => {
         navigation.navigate('Pokemon', {
           item,
+          profile,
           from: 'search',
         });
         setInput('');

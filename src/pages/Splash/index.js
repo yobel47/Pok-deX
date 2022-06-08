@@ -28,10 +28,10 @@ function Splash() {
     }
   }
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, [initializing]);
+  useEffect(
+    () => auth().onAuthStateChanged(onAuthStateChanged), // unsubscribe on unmount
+    [initializing],
+  );
 
   return (
     <>

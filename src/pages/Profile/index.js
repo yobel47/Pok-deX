@@ -15,7 +15,7 @@ import { pokeballHeader } from '../../assets';
 import styles from '../../utils/styles';
 import { getPokebagId } from '../../api/services/firebase';
 import { Loading, PokemonCard } from '../../components';
-import PokebagController from '../../api/controllers/Pokebag';
+import PokebagController from '../../api/controllers/PokebagController';
 import { removeData } from '../../utils/localStorage';
 import { onLogScreenView } from '../../utils/onLogScreenView';
 
@@ -81,13 +81,10 @@ function Profile() {
       });
   };
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      getId();
-      onLogScreenView('Profile');
-    });
-    return unsubscribe;
-  }, [navigation]);
+  useEffect(() => navigation.addListener('focus', () => {
+    getId();
+    onLogScreenView('Profile');
+  }), [navigation]);
 
   const renderItem = useCallback(({ item }) => (
     <PokemonCard item={item} opacity={opacity} profile={data} />

@@ -4,7 +4,7 @@ import {
 import React, {
   useEffect, useState, useMemo, useCallback,
 } from 'react';
-import PokemonController from '../../api/controllers/Pokemon';
+import PokemonController from '../../api/controllers/PokemonController';
 import {
   PokemonCard, Loading, Header,
 } from '../../components';

@@ -13,12 +13,10 @@ async function PokemonController(query) {
 
   const { results } = apiResponse.data;
 
-  const pokemons = results.map(async (pokemon) => {
+  const pokemons = results.map((pokemon) => {
     const pokemonId = getPokemonIdByUrl(pokemon.url);
 
-    const pokemonData = await getPokemonData(pokemonId);
-
-    return pokemonData;
+    return getPokemonData(pokemonId);
   });
 
   return Promise.all(pokemons);

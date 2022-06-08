@@ -35,7 +35,7 @@ export const releasePokemon = (uid, pokemonId) => {
 
 export const getPokebagId = (uid) => {
   const pokemonn = [];
-  const pokemonData = databaseRef()
+  return databaseRef()
     .ref(`/pokebag/${uid}`)
     .once('value')
     .then((snapshot) => {
@@ -49,7 +49,6 @@ export const getPokebagId = (uid) => {
       });
       return pokemonn;
     });
-  return pokemonData;
 };
 
 export const databaseRef = () => firebase

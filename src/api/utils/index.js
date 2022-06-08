@@ -1,8 +1,8 @@
 import capitalizeFirstLetter from './capitalizeFirstLetter';
 import getPokemonData from './getPokemonData';
 import getPokemonIdByUrl from './getPokemonIdByUrl';
-import getPokemonImageById from './getPokemonImageById';
+import getPokemonImage from './getPokemonImage';
 
 export {
-  capitalizeFirstLetter, getPokemonData, getPokemonIdByUrl, getPokemonImageById,
+  capitalizeFirstLetter, getPokemonData, getPokemonIdByUrl, getPokemonImage,
 };
