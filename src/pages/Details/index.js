@@ -24,6 +24,19 @@ function Details({ open, item }) {
 
   const pokemonGendersRate = getPokemonGenderStats(item.gender_rate);
 
+  const checkGenderIcon = (gender) => {
+    if (gender === 'male') {
+      return 'male-symbol';
+    }
+    return 'female-symbol';
+  };
+  const checkGenderColor = (gender) => {
+    if (gender === 'male') {
+      return '#6890F0';
+    }
+    return '#EE99AC';
+  };
+
   return (
     <Animated.View style={{
       height,
@@ -132,10 +145,8 @@ function Details({ open, item }) {
                 ) : (
                   <>
                     <Icon
-                      name={
-                      gender.gender === 'male' ? 'male-symbol' : 'female-symbol'
-                    }
-                      color={gender.gender === 'male' ? '#6890F0' : '#EE99AC'}
+                      name={checkGenderIcon(gender.gender)}
+                      color={checkGenderColor(gender.gender)}
                       size={16}
                     />
                     {'  '}

@@ -72,7 +72,6 @@ function Register() {
           .ref(`users/${res.user.uid}/`)
           .set(data);
 
-        // storeData('user', dataLocal);
         Alert.alert('Register Success');
         navigation.navigate('Login');
       })
