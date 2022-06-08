@@ -7,10 +7,36 @@ export const register = (email, pass) => auth().createUserWithEmailAndPassword(e
 
 export const userLoggedIn = (user) => auth().onAuthStateChanged(user);
 
-export const getPokebagId = () => {
+export const catchPokemon = (uid, pokemonId) => {
+  databaseRef()
+    .ref(`/pokebag/${uid}`)
+    .push()
+    .set({
+      id: pokemonId,
+    });
+};
+
+export const releasePokemon = (uid, pokemonId) => {
+  databaseRef()
+    .ref(`/pokebag/${uid}/`)
+    .once('value')
+    .then((val) => {
+      val.forEach((item) => {
+        item.forEach((childItem) => {
+          if (childItem.val() === pokemonId) {
+            databaseRef()
+              .ref(`/pokebag/${uid}/${item.key}`)
+              .set(null);
+          }
+        });
+      });
+    });
+};
+
+export const getPokebagId = (uid) => {
   const pokemonn = [];
   const pokemonData = databaseRef()
-    .ref('/pokebag/1n24gsvFlJdredijJ1bk4AwiL772/')
+    .ref(`/pokebag/${uid}`)
     .once('value')
     .then((snapshot) => {
       snapshot.forEach((childSnapshot) => {
@@ -23,7 +49,6 @@ export const getPokebagId = () => {
       });
       return pokemonn;
     });
-
   return pokemonData;
 };
 

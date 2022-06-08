@@ -1,7 +1,7 @@
 import {
   View, StatusBar, ImageBackground,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import { pokedex } from '../../assets';
@@ -9,12 +9,13 @@ import { Pokeball } from '../../components';
 
 function Splash() {
   const navigation = useNavigation();
+  const [initializing, setInitializing] = useState(true);
+  const [, setUserLogin] = useState();
 
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('Login');
-    }, 1500);
-    const subscriber = auth().onAuthStateChanged((user) => {
+  function onAuthStateChanged(user) {
+    setUserLogin(user);
+    if (initializing) {
+      setInitializing(false);
       if (user) {
         setTimeout(() => {
           navigation.replace('Home');
@@ -24,10 +25,13 @@ function Splash() {
           navigation.replace('Login');
         }, 1500);
       }
-    });
+    }
+  }
 
-    return subscriber();
-  }, [navigation]);
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, [initializing]);
 
   return (
     <>

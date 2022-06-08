@@ -13,7 +13,7 @@ import Details from '../Details';
 
 function Pokemon() {
   const route = useRoute();
-  const { item } = route.params;
+  const { item, profile } = route.params;
 
   const translateY = useMemo(() => new Animated.Value(0), []);
   const [open, setOpen] = useState(false);
@@ -109,10 +109,7 @@ function Pokemon() {
         </Animated.View>
 
         <View style={{ flex: 1 }}>
-          {/* Header */}
           <Header item={item} translateY={translateY} />
-
-          {/* Summary */}
           <Summary item={item} translateY={translateY} />
 
           <PanGestureHandler
@@ -131,7 +128,7 @@ function Pokemon() {
 
         </View>
       </View>
-      <CatchAnimation translateY={translateY} item={item} />
+      <CatchAnimation translateY={translateY} item={item} profile={profile} />
     </>
   );
 }

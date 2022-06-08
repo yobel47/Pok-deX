@@ -18,7 +18,7 @@ import { capitalizeFirstLetter } from '../../api/utils';
 import { databaseRef, login } from '../../api/services/firebase';
 import { storeData } from '../../utils/localStorage';
 
-const { height, width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('screen');
 
 function Login() {
   const navigation = useNavigation();

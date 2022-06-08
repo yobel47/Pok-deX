@@ -9,12 +9,12 @@ import PokeballCatch from '../PokeballCatch';
 import PokeballRelease from '../PokeballRelease';
 import styles from '../../../utils/styles';
 import getColorByPokemonType from '../../../utils/getColorByPokemonType';
-import { getPokebagId } from '../../../api/services/firebase';
+import { getPokebagId, releasePokemon, catchPokemon } from '../../../api/services/firebase';
 
-const { height, width } = Dimensions.get('window');
+const { height, width } = Dimensions.get('screen');
 
 function CatchAnimation({
-  translateY, item,
+  translateY, item, profile,
 }) {
   const [isCatch, setIsCatch] = useState(false);
   const [getPokemon, setGetPokemon] = useState(false);
@@ -27,8 +27,8 @@ function CatchAnimation({
   const scalePokeball = useMemo(() => new Animated.Value(0), []);
   const [, setPokebagId] = useState([]);
 
-  const getId = () => {
-    getPokebagId().then((value) => {
+  const getId = (uid) => {
+    getPokebagId(uid).then((value) => {
       setPokebagId(value.sort());
       if (!value.includes(item.id)) {
         setIsCatch(true);
@@ -38,7 +38,7 @@ function CatchAnimation({
   };
 
   useEffect(() => {
-    getId();
+    getId(profile.uid);
   }, []);
 
   const onDarker = useCallback(() => {
@@ -91,7 +91,19 @@ function CatchAnimation({
       toValue: 0,
       duration: 300,
       useNativeDriver: true,
-    }).start(setGetPokemon(!prize));
+    }).start(() => {
+      setGetPokemon(!prize);
+      if (isCatch) {
+        if (prize) {
+          setIsCatch(false);
+          catchPokemon(profile.uid, item.id);
+        }
+      } else {
+        releasePokemon(profile.uid, item.id);
+        setIsCatch(true);
+        setGetPokemon(false);
+      }
+    });
   }, [scalePokeball, translateYPokeball, translateYDarker, prize, getPokemon]);
 
   const darkerStyle = {
@@ -151,7 +163,7 @@ function CatchAnimation({
       }
       return 'Sorry';
     }
-    return 'Congratulations';
+    return 'Thank you';
   };
 
   const checkText = () => {

@@ -14,7 +14,7 @@ import getColorByPokemonType from '../../utils/getColorByPokemonType';
 
 const { width } = Dimensions.get('screen');
 
-function PokemonCard({ item, opacity }) {
+function PokemonCard({ item, opacity, profile }) {
   const navigation = useNavigation();
 
   const backgroundColor = useMemo(
@@ -31,7 +31,7 @@ function PokemonCard({ item, opacity }) {
   };
 
   const handlePress = useCallback(() => {
-    navigation.navigate('Pokemon', { item, from: 'card' });
+    navigation.navigate('Pokemon', { item, profile, from: 'card' });
   }, [item]);
 
   return (

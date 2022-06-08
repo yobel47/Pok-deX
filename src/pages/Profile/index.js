@@ -4,7 +4,9 @@ import {
 import React, {
   useCallback, useState, useEffect, useMemo,
 } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import {
+  useNavigation, useRoute,
+} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { SharedElement } from 'react-navigation-shared-element';
 import auth from '@react-native-firebase/auth';
@@ -32,9 +34,10 @@ function Profile() {
 
   const getId = () => {
     try {
-      getPokebagId().then((value) => {
-        setPokebagId(value.sort());
-        getPokebagData(value);
+      getPokebagId(data.uid).then((value) => {
+        const sortedValue = value.sort((a, b) => a - b);
+        setPokebagId(sortedValue);
+        getPokebagData(sortedValue);
       });
 
       Animated.parallel([
@@ -76,12 +79,33 @@ function Profile() {
   };
 
   useEffect(() => {
-    getId();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      getId();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const renderItem = useCallback(({ item }) => (
-    <PokemonCard item={item} opacity={opacity} />
-  ));
+    <PokemonCard item={item} opacity={opacity} profile={data} />
+  ), []);
+
+  const emptyComponent = useCallback(() => (
+    <View style={{ height: '100%' }}>
+      <Text style={{
+        ...styles.applicationTitle,
+        width: 200,
+        fontSize: 20,
+        marginTop: 58,
+        textAlign: 'center',
+        marginHorizontal: 40,
+        alignSelf: 'center',
+      }}
+      >
+        There is no pokemon in your bag.
+      </Text>
+    </View>
+
+  ), []);
 
   const header = (
     <>
@@ -118,7 +142,7 @@ function Profile() {
           color: 'black', ...styles.applicationTitle, fontSize: 32, alignSelf: 'center', marginVertical: 12,
         }}
         >
-          Pokédex
+          {data.fullname}
         </Text>
         <View style={{ height: 1, backgroundColor: 'lightgrey' }} />
         <Text style={{
@@ -176,6 +200,7 @@ function Profile() {
           ListHeaderComponent={header}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 32 }}
+          ListEmptyComponent={emptyComponent}
         />
       )}
     </View>

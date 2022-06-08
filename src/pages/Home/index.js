@@ -90,13 +90,13 @@ function Home() {
 
   const keyExt = useCallback((item) => item.id);
   const renderItem = useCallback(({ item }) => (
-    <PokemonCard item={item} opacity={opacity} />
+    <PokemonCard item={item} opacity={opacity} profile={profile} />
   ));
 
   return (
     <View>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      <View style={{ marginTop: 25 }} />
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
+      {/* <View style={{ marginTop: 25 }} /> */}
       {loadingInitalData ? (
         <>
           <Header data={profile} />
