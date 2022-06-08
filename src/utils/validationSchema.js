@@ -26,5 +26,3 @@ export const registerSchema = yup.object().shape({
     .string()
     .required('Name is a required field'),
 });
-
-// export default loginSchema;
